@@ -1,6 +1,6 @@
 /* meshplus_plugin.js - Mesh+ Workshop e CSG via CDN */
 
-(function() {
+
     let action_workshop, workshop_dialog;
     const CDN_URL = 'https://cdnjs.cloudflare.com/ajax/libs/csg.js/2.0.0/csg.min.js';
     
