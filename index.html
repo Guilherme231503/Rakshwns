@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Minimalista</title>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <!-- Video.js -->
+  <link href="https://vjs.zencdn.net/8.9.0/video-js.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background: #000;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      position: relative;
+      width: 92%;
+      max-width: 600px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+    }
+
+    /* Video */
+    video {
+      width: 100%;
+      border-radius: 22px;
+      pointer-events: none; /* impede clique direto */
+    }
+
+    /* Botão Play/Pause */
+    .play-btn {
+      position: absolute;
+      bottom: 22px;
+      right: 22px;
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+
+      /* Vidro fosco */
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      /* Ícone */
+      font-size: 2rem;
+      color: white;
+
+      /* Glow suave */
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+
+      transition: 0.25s ease;
+    }
+
+    .play-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 22px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Ajuste para celular */
+    @media (max-width: 600px) {
+      .play-btn {
+        width: 65px;
+        height: 65px;
+        font-size: 1.8rem;
+      }
+
+      .container {
+        border-radius: 20px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <video
+      id="videoPlayer"
+      class="video-js vjs-default-skin"
+      preload="auto"
+      playsinline
+      controlslist="nodownload noremoteplayback"
+      disablepictureinpicture
+      oncontextmenu="return false;"
+    >
+      <source src="VID-20251128-WA0390.mp4" type="video/mp4">
+    </video>
+
+    <button class="play-btn" id="playPauseBtn">
+      <i class="bi bi-play-fill"></i>
+    </button>
+  </div>
+
+  <!-- Video.js -->
+  <script src="https://vjs.zencdn.net/8.9.0/video.min.js"></script>
+
+  <script>
+    const video = videojs('videoPlayer', {
+      controls: false,
+      autoplay: false,
+      preload: 'auto'
+    });
+
+    const btn = document.getElementById('playPauseBtn');
+    const icon = btn.querySelector('i');
+
+    btn.addEventListener('click', () => {
+      if (video.paused()) {
+        video.play();
+        icon.classList.replace('bi-play-fill', 'bi-pause-fill');
+      } else {
+        video.pause();
+        icon.classList.replace('bi-pause-fill', 'bi-play-fill');
+      }
+    });
+  </script>
+
+</body>
+</html>
